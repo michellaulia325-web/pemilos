@@ -2,128 +2,205 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pemilos 2025</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pemilihan Ketua OSIS SMK Negeri 1 Ampelgading</title>
   <style>
-    /* Reset */
-    * {
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #7c3aed, #06b6d4);
+      color: #fff;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
+      transition: background .3s, color .3s;
     }
-
-    body {
-      background: linear-gradient(135deg, #4facfe, #00f2fe);
-      color: #333;
-      min-height: 100vh;
+    body.light {
+      background: #f3f4f6;
+      color: #111;
     }
-
     header {
-      background: #fff;
-      padding: 20px;
       text-align: center;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 2rem;
+      background: rgba(0,0,0,0.3);
     }
-
-    header h1 {
-      color: #0077b6;
-      font-size: 2.2rem;
-      margin-bottom: 5px;
-    }
-
-    header p {
-      font-size: 1rem;
-      color: #555;
-    }
-
+    header h1 { margin: 0; }
     .container {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
-
     .card {
-      background: #fff;
+      background: rgba(255,255,255,0.1);
       border-radius: 12px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-      padding: 20px;
-      margin-bottom: 30px;
-      transition: transform 0.3s ease;
+      padding: 1rem;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      transition: transform .2s;
     }
-
-    .card:hover {
-      transform: translateY(-5px);
+    body.light .card {
+      background: #fff;
+      color: #111;
     }
-
-    .card h2 {
-      color: #023e8a;
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      margin-bottom: 15px;
-      color: #444;
-    }
-
-    .btn-vote {
+    .card:hover { transform: translateY(-5px); }
+    .card h2 { margin-top: 0; }
+    .btn {
       display: inline-block;
-      padding: 10px 20px;
-      background: #0077b6;
-      color: #fff;
+      padding: .6rem 1rem;
       border-radius: 8px;
+      background: #06b6d4;
+      color: #fff;
+      font-weight: bold;
       text-decoration: none;
-      transition: background 0.3s ease;
+      cursor: pointer;
+      border: none;
+      margin-top: .5rem;
     }
-
-    .btn-vote:hover {
-      background: #0096c7;
-    }
-
+    .btn:hover { background: #0891b2; }
     footer {
       text-align: center;
-      padding: 20px;
-      background: #fff;
-      margin-top: 40px;
-      box-shadow: 0 -4px 6px rgba(0,0,0,0.1);
+      padding: 1rem;
+      background: rgba(0,0,0,0.3);
+      margin-top: 2rem;
     }
-
-    footer p {
-      color: #555;
+    #hasil {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .bar-container {
+      background: rgba(255,255,255,0.2);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: .5rem 0;
+    }
+    .bar {
+      height: 24px;
+      line-height: 24px;
+      padding-left: .5rem;
+      color: #fff;
+      font-weight: bold;
+    }
+    .bar.ariny { background: #7c3aed; }
+    .bar.kaka { background: #06b6d4; }
+    .bar.bagus { background: #22c55e; }
+    .top-actions {
+      text-align: center;
+      margin: 1rem;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Pemilos 2025</h1>
-    <p>Suara Anda Menentukan Masa Depan OSIS!</p>
+    <h1>🗳️ Pemilihan Ketua OSIS</h1>
+    <p>SMK Negeri 1 Ampelgading</p>
+    <p>Countdown ke Hari Pemilos: <span id="countdown">Memuat...</span></p>
+    <div class="top-actions">
+      <button class="btn" onclick="resetVote()">🔄 Reset Suara</button>
+      <button class="btn" onclick="toggleTheme()">🌙/☀️ Mode</button>
+    </div>
   </header>
 
-  <div class="container">
+  <section class="container">
     <div class="card">
-      <h2>Kandidat 1: Siti Aisyah</h2>
-      <p>Visi: Meningkatkan kreativitas siswa melalui kegiatan seni dan budaya.</p>
-      <p>Misi: Mengadakan lomba rutin, memperkuat ekskul seni, dan festival tahunan.</p>
-      <a href="#" class="btn-vote">Pilih Kandidat 1</a>
+      <h2>👑 Ariny</h2>
+      <p>Slogan: "Kreatif, aktif, inspiratif!"</p>
+      <button class="btn" onclick="vote('Ariny')">Vote Ariny</button>
     </div>
 
     <div class="card">
-      <h2>Kandidat 2: Budi Santoso</h2>
-      <p>Visi: Mewujudkan lingkungan sekolah yang hijau dan sehat.</p>
-      <p>Misi: Program penghijauan, bank sampah, dan olahraga rutin.</p>
-      <a href="#" class="btn-vote">Pilih Kandidat 2</a>
+      <h2>👑 Kaka</h2>
+      <p>Slogan: "Disiplin happy, prestasi naik!"</p>
+      <button class="btn" onclick="vote('Kaka')">Vote Kaka</button>
     </div>
 
     <div class="card">
-      <h2>Kandidat 3: Rina Maharani</h2>
-      <p>Visi: Memperkuat solidaritas dan kepedulian sosial antar siswa.</p>
-      <p>Misi: Bakti sosial, mentoring antar kelas, dan forum diskusi siswa.</p>
-      <a href="#" class="btn-vote">Pilih Kandidat 3</a>
+      <h2>👑 Bagus</h2>
+      <p>Slogan: "Ramah lingkungan, ramah teman."</p>
+      <button class="btn" onclick="vote('Bagus')">Vote Bagus</button>
     </div>
-  </div>
+  </section>
+
+  <div id="hasil">Belum ada suara.</div>
+  <div id="grafik" style="max-width:600px;margin:2rem auto;"></div>
 
   <footer>
-    <p>&copy; 2025 Panitia Pemilos SMAN Contoh</p>
+    Dibuat untuk simulasi e-voting OSIS ✨
   </footer>
+
+  <script>
+    // Data suara
+    let tally = JSON.parse(localStorage.getItem('hasilVote')) || {Ariny:0, Kaka:0, Bagus:0};
+
+    function vote(nama) {
+      if(localStorage.getItem('sudahVote')) {
+        alert("Kamu sudah memberikan suara!");
+        return;
+      }
+      tally[nama]++;
+      localStorage.setItem('hasilVote', JSON.stringify(tally));
+      localStorage.setItem('sudahVote', 'true');
+      tampilkanHasil();
+      alert("Terima kasih sudah memilih " + nama + "!");
+    }
+
+    function tampilkanHasil() {
+      const total = tally.Ariny + tally.Kaka + tally.Bagus;
+      document.getElementById('hasil').innerHTML =
+        `Hasil sementara:<br>
+        Ariny: ${tally.Ariny} suara<br>
+        Kaka: ${tally.Kaka} suara<br>
+        Bagus: ${tally.Bagus} suara`;
+
+      // Grafik batang
+      const grafik = document.getElementById('grafik');
+      grafik.innerHTML = '';
+      ['Ariny','Kaka','Bagus'].forEach(nama=>{
+        const val = tally[nama];
+        const pct = total ? Math.round(val/total*100) : 0;
+        const bar = document.createElement('div');
+        bar.className = 'bar ' + nama.toLowerCase();
+        bar.style.width = pct + '%';
+        bar.textContent = `${nama} (${val} suara - ${pct}%)`;
+        const container = document.createElement('div');
+        container.className = 'bar-container';
+        container.appendChild(bar);
+        grafik.appendChild(container);
+      });
+    }
+
+    function resetVote() {
+      localStorage.removeItem('sudahVote');
+      localStorage.removeItem('hasilVote');
+      tally = {Ariny:0, Kaka:0, Bagus:0};
+      tampilkanHasil();
+      alert("Data suara direset. Kamu bisa vote lagi.");
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('light');
+    }
+
+    // Countdown
+    const targetDate = new Date('2025-12-11T08:00:00+07:00');
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+      const cdEl = document.getElementById('countdown');
+      if(diff <= 0) {
+        cdEl.textContent = 'Hari ini! Ayo vote!';
+        return;
+      }
+      const d = Math.floor(diff/(1000*60*60*24));
+      const h = Math.floor((diff/(1000*60*60))%24);
+      const m = Math.floor((diff/(1000*60))%60);
+      cdEl.textContent = `${d}h ${h}j ${m}m`;
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 60000);
+
+    tampilkanHasil();
+  </script>
 </body>
-  </html>
+      </html>
